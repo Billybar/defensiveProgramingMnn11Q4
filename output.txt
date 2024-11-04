@@ -1,0 +1,8 @@
+﻿Total of line: 1453
+Total of line: 367
+Total of line: 72
+Total of line: 3067.85
+Total of line: 18
+Total of line: 11
+Sums of columns:
+ 88.14 530.71 563 2769 533 505
