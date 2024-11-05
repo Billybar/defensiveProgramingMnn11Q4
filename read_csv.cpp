@@ -22,6 +22,7 @@ bool isNumeric(const std::string& str) {
     bool hasDigits = false;
     bool hasDot = false;
 
+    // Check for digits and dot only else return false
     for (size_t i = start; i < str.length(); ++i) {
         if (std::isdigit(str[i])) {
             hasDigits = true; // Found a digit
@@ -46,9 +47,8 @@ double parseToDouble(const std::string& str) {
     }
 }
 
-
 int main() {
-    std::string filename = "example.csv";  // Path to your CSV file
+    std::string filename = "example.csv";  // Path to CSV file
     std::ifstream file(filename);       // Open the CSV file
 
     if (!file.is_open()) {
@@ -67,7 +67,7 @@ int main() {
     std::string line;
     std::vector<std::vector<std::string>> data;  // To store CSV data
 
-    // Read the file line by line
+    // Read file line by line and store in data variable
     while (std::getline(file, line)) {
         std::vector<std::string> row;
         std::stringstream ss(line);
@@ -83,36 +83,25 @@ int main() {
 
     file.close();
 
-    // Display the data (optional)
-    for (const auto& row : data) {
-        for (const auto& cell : row) {
-            std::cout << cell << " ";
-        }
-        std::cout << std::endl;
-    }
+    // Display the data  --- FOR TEST ONLY -----
+    // for (const auto& row : data) {
+    //     for (const auto& cell : row) {
+    //         std::cout << cell << " ";
+    //     }
+    //     std::cout << std::endl;
+    // }
 
     // Print sum cell nums for each row
+    int line_counter = 0;
     for (const auto& row : data) {
-
         double row_sum = 0;
         for (auto& cell : row) {
             if(isNumeric(cell)){
                 row_sum += parseToDouble(cell);
             }
         }
-        std::cout << "Total of line:" << row_sum << std::endl; // print each line
-    }
-
-    // Print rows totals
-    for (const auto& row : data) {
-
-        double row_sum = 0;
-        for (auto& cell : row) {
-            if(isNumeric(cell)){
-                row_sum += parseToDouble(cell);
-            }
-        }
-        std::cout << "Total of line:" << row_sum << std::endl; // print each line
+        std::cout << "Total of line " << line_counter << ": " << row_sum << std::endl; // print each line
+        line_counter++;
     }
 
     std::vector<double> columnSums;  // Vector to hold sums for each column
@@ -137,4 +126,3 @@ int main() {
 
     return 0;
 }
-
